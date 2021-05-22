@@ -56,6 +56,8 @@ def numerize_data():
 
   mushroom_data['habitat'] = pd.Categorical(mushroom_data['habitat'])
   mushroom_data['habitat'] = mushroom_data.habitat.cat.codes
+  
+numerize_data()
 
 # Create the X dataset
 X = mushroom_data.drop(['Mushroom', 'gillAttachment', 'gillSpacing', 'stalkSurfaceAboveRing', 'stalkSurfaceBelowRing', 'stalkColorAboveRing', 'stalkColorBelowRing', 'veilType', 'veilColor', 'ringNumber'], axis=1)
@@ -87,7 +89,7 @@ def create_model(hp):
   model.add(tf.keras.layers.Dense(units=10, input_shape=[13]))
   for i in range(hp.Int('Dense layers', min_value=1, max_value=10)):
     model.add(tf.keras.layers.Dense(hp.Int(f'Layer {i} Units', min_value=16, max_value=128, step=16)))
-    model.add(tf.keras.layers.Dropout(hp.Choice('Dropout rate', [1e-2, 1e-3, 1e-4])))
+    model.add(tf.keras.layers.Dropout(hp.Choice('Dropout rate', [0.1, 0.2, 0.3, 0.4, 0.5])))
 
   model.add(tf.keras.layers.Dense(units=2, activation='sigmoid'))
 
