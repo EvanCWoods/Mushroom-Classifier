@@ -70,7 +70,7 @@ print(train_size, test_size)
 # Create the training and testing datasets
 train_data = X[:train_size]
 train_labels = y[:train_size]
-test_data = y[train_size:]
+test_data = X[train_size:]
 test_labels = y[train_size:]
 
 # Print the [0] shape of each dataset to verify the correct size
